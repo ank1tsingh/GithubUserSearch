@@ -12,6 +12,7 @@
         <attribute name="repositoryName" attributeType="String"/>
         <attribute name="repoURL" attributeType="String"/>
         <attribute name="starCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CachedUser" inverseName="repositories" inverseEntity="CachedUser"/>
     </entity>
     <entity name="CachedUser" representedClassName="CachedUser" syncable="YES" codeGenerationType="class">
         <attribute name="accountCreated" optional="YES" attributeType="String"/>
@@ -25,5 +26,6 @@
         <attribute name="userBio" optional="YES" attributeType="String"/>
         <attribute name="userID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="username" attributeType="String"/>
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CachedRepository" inverseName="owner" inverseEntity="CachedRepository"/>
     </entity>
 </model>
