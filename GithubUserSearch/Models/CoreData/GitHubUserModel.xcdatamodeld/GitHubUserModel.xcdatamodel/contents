@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CachedRepository" representedClassName="CachedRepository" syncable="YES" codeGenerationType="class">
+        <attribute name="forkCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fullRepoName" attributeType="String"/>
+        <attribute name="isPrivateRepo" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastFetched" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastUpdate" attributeType="String"/>
+        <attribute name="primaryLanguage" attributeType="String"/>
+        <attribute name="repoDescription" optional="YES" attributeType="String"/>
+        <attribute name="repositoryID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repositoryName" attributeType="String"/>
+        <attribute name="repoURL" attributeType="String"/>
+        <attribute name="starCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="CachedUser" representedClassName="CachedUser" syncable="YES" codeGenerationType="class">
+        <attribute name="accountCreated" optional="YES" attributeType="String"/>
+        <attribute name="displayName" optional="YES" attributeType="String"/>
+        <attribute name="followerCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="followingCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="githubURL" attributeType="String"/>
+        <attribute name="lastFetched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="profileImageURL" attributeType="String"/>
+        <attribute name="repositoryCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="userBio" optional="YES" attributeType="String"/>
+        <attribute name="userID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="username" attributeType="String"/>
+    </entity>
 </model>
