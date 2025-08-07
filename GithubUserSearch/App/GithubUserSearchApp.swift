@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct GithubUserSearchApp: App {
-    let persistenceController = PersistenceController.shared
-
+    let dependencyContainer = AppDependencyContainer()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+           UserSearchView()
+                .environmentObject(dependencyContainer.makeUserSearchViewModel())
+                .environment(\.managedObjectContext, dependencyContainer.coreDataService.viewContext)
         }
     }
 }
