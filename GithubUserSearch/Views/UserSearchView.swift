@@ -32,8 +32,10 @@ struct UserSearchView: View {
                         users: searchViewModel.discoveredUsers,
                         isLoading: searchViewModel.isCurrentlySearching,
                         onUserTapped: { user in
-                            searchViewModel.userWasSelected(user)
-                            showingUserDetails = true
+                            Task {
+                                await searchViewModel.userWasSelected(user)
+                                showingUserDetails = true
+                            }
                         },
                         onLoadMore: {
                             Task {
@@ -43,7 +45,7 @@ struct UserSearchView: View {
                     )
                 }
             }
-            .navigationTitle("GitHub Explorer") 
+            .navigationTitle("GitHub Explorer")
             .alert("Oops!", isPresented: .constant(searchViewModel.lastErrorMessage != nil)) {
                 Button("Got it") {
                     searchViewModel.dismissError()
@@ -53,15 +55,20 @@ struct UserSearchView: View {
             }
             .sheet(isPresented: $showingUserDetails) {
                 if let selectedUser = searchViewModel.selectedUserProfile {
-                    UserDetailView(userProfile: selectedUser)
-                        .environmentObject(AppDependencyContainer().makeUserDetailViewModel(user: selectedUser))
+                    if searchViewModel.isLoadingUserDetails {
+                        VStack {
+                            ProgressView()
+                            Text("Loading user details...")
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else {
+                        UserDetailView(userProfile: selectedUser)
+                            .environmentObject(AppDependencyContainer().makeUserDetailViewModel(user: selectedUser))
+                    }
                 }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
-//#Preview {
-//    UserSearchView()
-//}

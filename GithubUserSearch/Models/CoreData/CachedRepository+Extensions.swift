@@ -15,7 +15,7 @@ extension CachedRepository {
             id: Int(repositoryID),
             repositoryName: repositoryName ?? "",
             fullRepoName: fullRepoName ?? "",
-            repoDescription: repoDescription,
+            repoDescription: repoDescription?.isEmpty == true ? nil : repoDescription,
             starCount: Int(starCount),
             forkCount: Int(forkCount),
             primaryLanguage: primaryLanguage,

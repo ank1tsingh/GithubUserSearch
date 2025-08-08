@@ -16,20 +16,21 @@ extension CachedUser {
             username: username ?? "",
             profileImageURL: profileImageURL ?? "",
             githubURL: githubURL ?? "",
-            displayName: displayName,
-            userBio: userBio,
-            repositoryCount: Int(repositoryCount),
-            followerCount: Int(followerCount),
-            followingCount: Int(followingCount),
-            accountCreated: accountCreated ?? ""
+            displayName: displayName?.isEmpty == true ? nil : displayName ,
+            userBio: userBio?.isEmpty == true ? nil : userBio,
+            repositoryCount: repositoryCount > 0 ? Int(repositoryCount) : nil,
+            followerCount: followerCount > 0 ? Int(followerCount) : nil,
+            followingCount: followingCount >= 0 ? Int(followingCount) : nil,
+            accountCreated: accountCreated?.isEmpty == true ? nil : accountCreated
         )
         
     }
+    
     func updateFrom(_ user: GitHubUser) {
         userID = Int32(user.id)
         username = user.username
-        displayName = user.displayName
-        userBio = user.userBio
+        displayName = user.displayName ?? ""
+        userBio = user.userBio ?? ""
         profileImageURL = user.profileImageURL
         githubURL = user.githubURL
         repositoryCount = Int32(user.repositoryCount ?? 0)

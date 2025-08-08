@@ -15,6 +15,7 @@ final class UserSearchViewModel: ObservableObject {
     @Published var lastErrorMessage: String?
     @Published var selectedUserProfile: GitHubUser?
     @Published var currentSearchQuery = ""
+    @Published var isLoadingUserDetails = false
     
     
     private let networkService: GitHubNetworkServiceProtocol
@@ -108,8 +109,16 @@ final class UserSearchViewModel: ObservableObject {
         }
     }
     
-    func userWasSelected(_ user: GitHubUser) {
-        selectedUserProfile = user
+    func userWasSelected(_ user: GitHubUser) async {
+        isLoadingUserDetails = true
+        do {
+            let detailedUser = try await networkService.fetchUser(username: user.username)
+            selectedUserProfile = detailedUser
+        } catch {
+            selectedUserProfile = user
+            lastErrorMessage = "could not load detail info of user"
+        }
+        isLoadingUserDetails = false 
     }
     
     func dismissError() {

@@ -10,8 +10,8 @@ import Foundation
 struct GitHubUser: Codable, Identifiable, Equatable {
     let id: Int
     let username: String
-    let profileImageURL: String?
-    let githubURL: String?
+    let profileImageURL: String
+    let githubURL: String
     let displayName: String?
     let userBio: String?
     let repositoryCount: Int?
